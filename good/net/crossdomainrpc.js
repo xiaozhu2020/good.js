@@ -50,7 +50,7 @@ good.net.CrossDomainRpc.prototype.send = function(onload) {
     var serializer = new goog.json.Serializer();
     this.body = serializer.serialize(this.body);
     var contentType = 'text/plain; charset=utf-8';
-    if(window.navigator.userAgent.toLowerCase().indexOf('msie')==-1){
+    if (window.navigator.userAgent.toLowerCase().indexOf('msie') == -1) {
       //contentType = 'application/json';
     }
     this.xhr.setRequestHeader('Content-Type', contentType);

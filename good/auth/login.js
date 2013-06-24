@@ -21,7 +21,7 @@ good.auth.login = function(name, pwd) {
     if (json && json['token']) {
       var uri = new goog.Uri(window.location);
       var redirect_uri = uri.getParameterValue('redirect_uri');
-      window.location.assign(redirect_uri +'#userId=' + json['userId'] + '&access_token=' + json['token']);
+      window.location.assign(redirect_uri + '#userId=' + json['userId'] + '&access_token=' + json['token']);
     } else {
       window.alert('登录失败');
     }
@@ -43,7 +43,7 @@ good.auth.check = function() {
   var access_token = query.get('access_token');
   if (!userId || !access_token) {
     var uri = new goog.Uri('good.js/auth/ServiceLogin.html');
-    uri.setParameterValue('redirect_uri', window.location)
+    uri.setParameterValue('redirect_uri', window.location);
     window.location.assign(uri.toString());
   } else {
     var auth = new good.auth.Auth(userId, access_token);

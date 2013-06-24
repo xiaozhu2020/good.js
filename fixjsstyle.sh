@@ -1,0 +1,1 @@
+fixjsstyle --strict -r good
