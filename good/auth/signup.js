@@ -19,7 +19,7 @@ good.auth.signup.start = function() {
     rpc.body = body;
     rpc.send(function(json) {
       if (json && !json['error']) {
-        window.location.assign('../../index.html');
+        window.location.assign('../../../index.html');
       }
     });
   });

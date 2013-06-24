@@ -42,7 +42,7 @@ good.auth.check = function() {
   var userId = query.get('userId');
   var access_token = query.get('access_token');
   if (!userId || !access_token) {
-    var uri = new goog.Uri('good.js/auth/ServiceLogin.html');
+    var uri = new goog.Uri('good.js/good/auth/ServiceLogin.html');
     uri.setParameterValue('redirect_uri', window.location);
     window.location.assign(uri.toString());
   } else {
