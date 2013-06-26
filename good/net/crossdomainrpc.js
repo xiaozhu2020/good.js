@@ -1,6 +1,7 @@
 'use strict';
 goog.provide('good.net.CrossDomainRpc');
 
+goog.require('good.config');
 goog.require('goog.json');
 
 good.net.CrossDomainRpc = function(method, url) {
@@ -46,14 +47,16 @@ good.net.CrossDomainRpc.prototype.send = function(onload) {
   this.xhr.onerror = function() {
     alert('Woops, there was an error making the request.');
   };
+  var contentType = 'text/plain; charset=utf-8';
   if (this.body) {
     var serializer = new goog.json.Serializer();
     this.body = serializer.serialize(this.body);
-    var contentType = 'text/plain; charset=utf-8';
     if (window.navigator.userAgent.toLowerCase().indexOf('msie') == -1) {
       //contentType = 'application/json';
     }
-    this.xhr.setRequestHeader('Content-Type', contentType);
   }
+  this.xhr.setRequestHeader('Content-Type', contentType);
   this.xhr.send(this.body);
 };
+
+good.config.start();
