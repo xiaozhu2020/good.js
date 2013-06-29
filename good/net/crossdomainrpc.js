@@ -1,9 +1,13 @@
 'use strict';
 goog.provide('good.net.CrossDomainRpc');
 
-goog.require('good.config');
 goog.require('goog.json');
 
+
+
+/**
+ * @constructor
+ */
 good.net.CrossDomainRpc = function(method, url) {
   if (url.indexOf('http') != 0) {
     url = good.net.CrossDomainRpc.BASE_URL + url;
@@ -33,6 +37,8 @@ good.net.CrossDomainRpc = function(method, url) {
   this.body = null;
 };
 
+
+/** @type {string} */
 good.net.CrossDomainRpc.BASE_URL = 'http://realtime.goodow.com/ah/api/';
 
 good.net.CrossDomainRpc.prototype.send = function(onload) {
@@ -58,5 +64,3 @@ good.net.CrossDomainRpc.prototype.send = function(onload) {
   this.xhr.setRequestHeader('Content-Type', contentType);
   this.xhr.send(this.body);
 };
-
-good.config.start();

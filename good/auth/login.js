@@ -2,17 +2,25 @@
 goog.provide('good.auth');
 goog.provide('good.auth.login');
 
+goog.require('good.config');
 goog.require('good.net.CrossDomainRpc');
 goog.require('goog.Uri');
 goog.require('goog.Uri.QueryData');
 goog.require('goog.dom');
 goog.require('goog.events');
 
+
+
+/**
+ * @constructor
+ */
 good.auth.Auth = function(userId, access_token) {
   this.userId = userId;
   this.access_token = access_token;
 };
 
+
+/** @type {good.auth.Auth} */
 good.auth.Auth.current = null;
 
 good.auth.login = function(name, pwd) {
@@ -29,6 +37,7 @@ good.auth.login = function(name, pwd) {
 };
 
 good.auth.login.start = function() {
+  good.config.start();
   var signIn = goog.dom.getElement('signIn');
   goog.events.listen(signIn, goog.events.EventType.CLICK, function(e) {
     var name = goog.dom.getElement('Email').value;

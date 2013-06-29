@@ -1,11 +1,13 @@
 'use strict';
 goog.provide('good.auth.signup');
 
+goog.require('good.config');
 goog.require('good.net.CrossDomainRpc');
 goog.require('goog.dom');
 goog.require('goog.events');
 
 good.auth.signup.start = function() {
+  good.config.start();
   var submit = goog.dom.getElement('submitbutton');
   goog.events.listen(submit, goog.events.EventType.CLICK, function(e) {
     var displayName = goog.dom.getElement('LastName').value + goog.dom.getElement('FirstName').value;
