@@ -13,6 +13,8 @@ goog.require('goog.events');
 
 /**
  * @constructor
+ * @param {string} userId
+ * @param {string} access_token
  */
 good.auth.Auth = function(userId, access_token) {
   this.userId = userId;
@@ -23,19 +25,28 @@ good.auth.Auth = function(userId, access_token) {
 /** @type {good.auth.Auth} */
 good.auth.Auth.current = null;
 
+
+/**
+ * @param {string} name
+ * @param {string} pwd
+ */
 good.auth.login = function(name, pwd) {
-  var rpc = new good.net.CrossDomainRpc('POST', 'account/v1/login/' + name + '/' + pwd);
+  var rpc = new good.net.CrossDomainRpc('POST', 'account/v1/login/' + name +
+      '/' + pwd);
   rpc.send(function(json) {
     if (json && json['token']) {
       var uri = new goog.Uri(window.location);
       var redirect_uri = uri.getParameterValue('redirect_uri');
-      window.location.assign(redirect_uri + '#userId=' + json['userId'] + '&access_token=' + json['token']);
+      window.location.assign(redirect_uri + '#userId=' + json['userId'] +
+          '&access_token=' + json['token']);
     } else {
       window.alert('登录失败');
     }
   });
 };
 
+
+/** */
 good.auth.login.start = function() {
   good.config.start();
   var signIn = goog.dom.getElement('signIn');
@@ -46,6 +57,8 @@ good.auth.login.start = function() {
   });
 };
 
+
+/** */
 good.auth.check = function() {
   var query = new goog.Uri.QueryData(window.location.hash.substring(1));
   var userId = query.get('userId');

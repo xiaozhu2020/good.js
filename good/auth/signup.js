@@ -6,11 +6,14 @@ goog.require('good.net.CrossDomainRpc');
 goog.require('goog.dom');
 goog.require('goog.events');
 
+
+/** */
 good.auth.signup.start = function() {
   good.config.start();
   var submit = goog.dom.getElement('submitbutton');
   goog.events.listen(submit, goog.events.EventType.CLICK, function(e) {
-    var displayName = goog.dom.getElement('LastName').value + goog.dom.getElement('FirstName').value;
+    var displayName = goog.dom.getElement('LastName').value +
+        goog.dom.getElement('FirstName').value;
     var name = goog.dom.getElement('user').value;
     var pwd = goog.dom.getElement('Passwd').value;
     var rpc = new good.net.CrossDomainRpc('POST', 'account/v1/accountinfo');

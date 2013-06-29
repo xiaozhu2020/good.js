@@ -7,6 +7,8 @@ goog.require('goog.json');
 
 /**
  * @constructor
+ * @param {string} method
+ * @param {string} url
  */
 good.net.CrossDomainRpc = function(method, url) {
   if (url.indexOf('http') != 0) {
@@ -41,14 +43,16 @@ good.net.CrossDomainRpc = function(method, url) {
 /** @type {string} */
 good.net.CrossDomainRpc.BASE_URL = 'http://realtime.goodow.com/ah/api/';
 
-good.net.CrossDomainRpc.prototype.send = function(onload) {
+
+/** @param {function(?Object)} onLoad */
+good.net.CrossDomainRpc.prototype.send = function(onLoad) {
   this.xhr.onload = function() {
     var responseText = this.responseText;
     if (responseText.length == 0) {
-      onload(null);
+      onLoad(null);
       return;
     }
-    onload(goog.json.parse(responseText));
+    onLoad(goog.json.parse(responseText));
   };
   this.xhr.onerror = function() {
     alert('Woops, there was an error making the request.');
