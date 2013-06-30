@@ -2,6 +2,8 @@
  * @fileoverview Externs for Goodow Realtime JavaScript API.
  * @externs
  */
+
+
 /**
  * Suppresses the compiler warning when multiple externs files declare the good
  * namespace.
@@ -18,13 +20,6 @@ good.realtime.onLoad = function(onLoad) {};
 
 /** @param {function()} onLoad */
 window.gdrOnLoad = function(onLoad) {};
-
-
-/**
- * @param {function()} onLoad
- * @suppress {duplicate}
- */
-var gdrOnLoad = function(onLoad) {};
 
 
 /**
