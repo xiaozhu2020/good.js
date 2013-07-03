@@ -1595,33 +1595,35 @@ body.jfk-scrollbar::-webkit-scrollbar-corner {
                     <strong>姓名</strong>
                   </legend>
                   <label id="lastname-label" class="lastname"> <strong>姓氏</strong> <input
-                    type="text" value="" name="LastName" id="LastName" spellcheck="false" n="1">
+                    type="text" required="true" name="LastName" id="LastName" spellcheck="false" n="1">
                     <span class="placeholder-text" id="lastname-placeholder" style="display: block;">姓氏</span>
                   </label><label id="firstname-label" class="firstname"> <strong>名字</strong> <input
-                    type="text" value="" name="FirstName" id="FirstName" spellcheck="false" n="2">
+                    type="text" required="true" name="FirstName" id="FirstName" spellcheck="false" n="2">
                     <span class="placeholder-text" id="firstname-placeholder"
                     style="display: block;">名字</span>
                   </label>
-                </fieldset>
-                <div class="infomsg" id="name-infomessage"></div>
-                <span role="alert" class="errormsg" id="errormsg_0_FirstName"> </span> <span
-                  role="alert" class="errormsg" id="errormsg_0_LastName"> </span>
+                </fieldset>                
+                <span role="alert" class="errormsg" id="errormsg_0_FirstName"> </span>
+                <span role="alert" class="errormsg" id="errormsg_0_LastName"> </span>
               </div>
               <div class="form-element" id="user-form-element">
                 <label id="user-label"> <strong> 选择您的用户名 </strong> <input type="text"
-                  required="true" maxlength="30" autocomplete="off" name="user" id="user" value=""
+                  required="true" maxlength="30" autocomplete="off" name="user" id="User"
                   spellcheck="false">
                 </label>
+                 <span role="alert" class="errormsg" id="errormsg_0_User" ></span>
               </div>
               <div class="form-element" id="password-form-element">
                 <label id="password-label"> <strong>设置密码</strong> <input type="password"
                   required="true" name="Passwd" id="Passwd">
-                </label> <span role="alert" class="errormsg" id="errormsg_0_Passwd"> </span>
+                </label> 
+                <span role="alert" class="errormsg" id="errormsg_0_Passwd"> </span>
               </div>
               <div class="form-element" id="confirm-password-form-element">
                 <label id="confirm-password-label"> <strong>确认密码</strong> <input
                   type="password" required="true" name="PasswdAgain" id="PasswdAgain">
-                </label> <span role="alert" class="errormsg" id="errormsg_0_PasswdAgain"> </span>
+                </label> 
+                <span role="alert" class="errormsg" id="errormsg_0_PasswdAgain"> </span>
               </div>
               <div class="form-element nextstep-button">
                 <input id="submitbutton" name="submitbutton" type="button" value="确认"

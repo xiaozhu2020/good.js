@@ -8,13 +8,16 @@ goog.require('goog.Uri');
 goog.require('goog.Uri.QueryData');
 goog.require('goog.dom');
 goog.require('goog.events');
+goog.require('goog.events.FocusHandler');
 
 
 
 /**
  * @constructor
- * @param {string} userId
- * @param {string} access_token
+ * @param {string}
+ *          userId
+ * @param {string}
+ *          access_token
  */
 good.auth.Auth = function(userId, access_token) {
   this.userId = userId;
@@ -27,12 +30,14 @@ good.auth.Auth.current = null;
 
 
 /**
- * @param {string} name
- * @param {string} pwd
+ * @param {string}
+ *          name
+ * @param {string}
+ *          pwd
  */
 good.auth.login = function(name, pwd) {
-  var rpc = new good.net.CrossDomainRpc('POST', 'account/v1/login/' + name +
-      '/' + pwd);
+  var rpc = new good.net.CrossDomainRpc('POST', 'account/v1/login/' +
+      name + '/' + pwd);
   rpc.send(function(json) {
     if (json && json['token']) {
       var uri = new goog.Uri(window.location);
@@ -40,7 +45,10 @@ good.auth.login = function(name, pwd) {
       window.location.assign(redirect_uri + '#userId=' + json['userId'] +
           '&access_token=' + json['token']);
     } else {
-      window.alert('登录失败');
+      var errormsg_0_Passwd = goog.dom.getElement('errormsg_0_Passwd');
+      errormsg_0_Passwd.innerText = '您输入的用户名或密码不正确。 ';
+      var Passwd = goog.dom.getElement('Passwd');
+      Passwd.className = 'form-error';
     }
   });
 };
@@ -49,6 +57,13 @@ good.auth.login = function(name, pwd) {
 /** */
 good.auth.login.start = function() {
   good.config.start();
+  var Passwd = goog.dom.getElement('Passwd');
+  goog.events.listen(Passwd, goog.events.FocusHandler.EventType.FOCUSIN,
+      function(e) {
+        var errormsg_0_Passwd = goog.dom.getElement('errormsg_0_Passwd');
+        errormsg_0_Passwd.innerText = '';
+        Passwd.className = '';
+      });
   var signIn = goog.dom.getElement('signIn');
   goog.events.listen(signIn, goog.events.EventType.CLICK, function(e) {
     var name = goog.dom.getElement('Email').value;
