@@ -2,6 +2,7 @@
 goog.provide('good.auth');
 goog.provide('good.auth.login');
 
+goog.require('good.auth.signup');
 goog.require('good.config');
 goog.require('good.net.CrossDomainRpc');
 goog.require('goog.Uri');
@@ -36,8 +37,25 @@ good.auth.Auth.current = null;
  *          pwd
  */
 good.auth.login = function(name, pwd) {
-  var rpc = new good.net.CrossDomainRpc('POST', 'account/v1/login/' +
-      name + '/' + pwd);
+  if (good.auth.signup.isEmpty(name)) {
+    var errormsg_0_Email = goog.dom.getElement('errormsg_0_Email');
+    errormsg_0_Email.innerText = '输入您的用户名。 ';
+    var Email = goog.dom.getElement('Email');
+    Email.className = 'form-error';
+    return;
+  }
+
+  if (good.auth.signup.isEmpty(pwd)) {
+    var errormsg_0_Passwd = goog.dom.getElement('errormsg_0_Passwd');
+    errormsg_0_Passwd.innerText = '输入您的密码。 ';
+    var Passwd = goog.dom.getElement('Passwd');
+    Passwd.className = 'form-error';
+    return;
+  }
+
+  var rpc = new good.net.CrossDomainRpc('POST', good.config.ACCOUNT,
+      good.config.VERSION, 'login/' +
+      encodeURIComponent(name) + '/' + encodeURIComponent(pwd));
   rpc.send(function(json) {
     if (json && json['token']) {
       var uri = new goog.Uri(window.location);
@@ -64,6 +82,13 @@ good.auth.login.start = function() {
         errormsg_0_Passwd.innerText = '';
         Passwd.className = '';
       });
+  var Email = goog.dom.getElement('Email');
+  goog.events.listen(Email, goog.events.FocusHandler.EventType.FOCUSIN,
+      function(e) {
+        var errormsg_0_Email = goog.dom.getElement('errormsg_0_Email');
+        errormsg_0_Email.innerText = '';
+        Email.className = '';
+      });
   var signIn = goog.dom.getElement('signIn');
   goog.events.listen(signIn, goog.events.EventType.CLICK, function(e) {
     var name = goog.dom.getElement('Email').value;
@@ -89,4 +114,3 @@ good.auth.check = function() {
 };
 
 goog.exportSymbol('good.auth.login.start', good.auth.login.start);
-goog.exportSymbol('good.auth.check', good.auth.check);

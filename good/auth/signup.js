@@ -6,13 +6,14 @@ goog.require('good.net.CrossDomainRpc');
 goog.require('goog.dom');
 goog.require('goog.events');
 goog.require('goog.events.FocusHandler');
+goog.require('goog.events.InputHandler');
 
 
 /**
  * @param {string} str
  * @return {boolean}
  */
-good.auth.signup.IsEmpty = function(str) {
+good.auth.signup.isEmpty = function(str) {
   if (str == null || str == '') {
     return true;
   }else {
@@ -33,16 +34,21 @@ good.auth.signup.validate = function(id) {
     if (id == 'LastName' || id == 'FirstName') {
       if (id == 'LastName') {
         $('errormsg_0_FirstName').innerText = '';
+        var lastname_placeholder = $('lastname-placeholder');
+        lastname_placeholder.style.display = 'block';
       }else {
         $('errormsg_0_LastName').innerText = '';
+        var firstname_placeholder = $('firstname-placeholder');
+        firstname_placeholder.style.display = 'block';
       }
     }
     el.className = 'form-error';
     errormsg.innerText = '此处不能留空。';
   }else {
-    if (id == 'User' && !good.auth.signup.IsEmpty(elvalue)) {
+    if (id == 'User' && !good.auth.signup.isEmpty(elvalue)) {
       var rpc = new good.net.CrossDomainRpc('POST',
-          'account/v2/findByName/' + elvalue);
+          good.config.ACCOUNT, good.config.VERSION,
+          'findByName/' + elvalue);
       rpc.send(function(json) {
         if (json && json['token']) {
           errormsg.innerText = '该用户名已存在。改用其他用户名?';
@@ -51,8 +57,8 @@ good.auth.signup.validate = function(id) {
     }else if (id == 'PasswdAgain') {
       var pwd = $('Passwd').value;
       var pwdAgain = $('PasswdAgain').value;
-      if (!good.auth.signup.IsEmpty(pwd) &&
-          !good.auth.signup.IsEmpty(pwdAgain) &&
+      if (!good.auth.signup.isEmpty(pwd) &&
+          !good.auth.signup.isEmpty(pwdAgain) &&
           pwd != pwdAgain) {
         errormsg.innerText = '两个密码不匹配。';
       }
@@ -105,6 +111,22 @@ good.auth.signup.formCheck = function(array) {
 /** */
 good.auth.signup.start = function() {
   good.config.start();
+  var $ = goog.dom.getElement;
+  var LastName = $('LastName');
+  var FirstName = $('FirstName');
+
+  var DOM_EVENTS = ['keydown', 'keyup', 'keypress', 'change', 'cut', 'paste',
+    'drop', 'input'];
+
+  goog.events.listen(LastName, DOM_EVENTS, function(e) {
+    var lastname_placeholder = $('lastname-placeholder');
+    lastname_placeholder.style.display = 'none';
+  });
+
+  goog.events.listen(FirstName, DOM_EVENTS, function(e) {
+    var firstname_placeholder = $('firstname-placeholder');
+    firstname_placeholder.style.display = 'none';
+  });
 
   var array = new Array('LastName', 'FirstName',
       'User', 'Passwd', 'PasswdAgain');
@@ -115,11 +137,12 @@ good.auth.signup.start = function() {
     if (!good.auth.signup.formCheck(array)) {
       return false;
     }
-    var displayName = goog.dom.getElement('LastName').value +
-        goog.dom.getElement('FirstName').value;
-    var name = goog.dom.getElement('User').value;
-    var pwd = goog.dom.getElement('Passwd').value;
-    var rpc = new good.net.CrossDomainRpc('POST', 'account/v2/accountinfo');
+    var displayName = $('LastName').value +
+        $('FirstName').value;
+    var name = $('User').value;
+    var pwd = $('Passwd').value;
+    var rpc = new good.net.CrossDomainRpc('POST', good.config.ACCOUNT,
+        good.config.VERSION, 'accountinfo');
     var body = {
       'name' : name,
       'token' : pwd,
