@@ -61,14 +61,14 @@ good.net.CrossDomainRpc.prototype.send = function(onLoad) {
   this.xhr.onerror = function() {
     alert('Woops, there was an error making the request.');
   };
-  var contentType = 'text/plain; charset=utf-8';
   if (this.body) {
+    var contentType = 'text/plain; charset=utf-8';
     var serializer = new goog.json.Serializer();
     this.body = serializer.serialize(this.body);
     if (window.navigator.userAgent.toLowerCase().indexOf('msie') == -1) {
       //contentType = 'application/json';
     }
+    this.xhr.setRequestHeader('Content-Type', contentType);
   }
-  this.xhr.setRequestHeader('Content-Type', contentType);
   this.xhr.send(this.body);
 };
