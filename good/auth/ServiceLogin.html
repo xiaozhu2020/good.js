@@ -5,6 +5,10 @@
   <title>科睿星 帐户</title>
 <script src="../../closure-library/closure/goog/base.js"></script>
 <script src="../deps.js"></script>
+<script>
+  goog.require('good.auth.login');
+</script>
+<!-- <script src="login-compiled.js"></script> -->
 <style type="text/css">
   html, body, div, h1, h2, h3, h4, h5, h6, p, img, dl,
   dt, dd, ol, ul, li, table, tr, td, form, object, embed,
@@ -1282,13 +1286,13 @@
   }
 </style>
   </head>
-  <body>
+  <body onload="good.auth.login.start()">
   <div class="wrapper">
   <div class="google-header-bar">
   <div class="header content clearfix">
   <!-- <img class="logo" src="../images/logo.png" alt="Google"> -->
   <span class="signup-button">
-  <a id="link-signup" class="g-button g-button-red" href="SignUp.html" target="_blank">
+  <a id="link-signup" class="g-button g-button-red" href="SignUp.html">
   注册
   </a>
   </span>
@@ -1629,10 +1633,4 @@
   
 
 <div class="chext-container chext-container-vertical chext-hwt-ime notranslate" tabindex="-1" style="direction: ltr; position: fixed; display: none; -webkit-user-select: none; left: 2px; top: 2px;"><canvas class="chext-hwt-canvas" width="425" height="194" style="-webkit-user-select: none;"></canvas><div class="chext-kd-img chext-hwt-close" style="-webkit-user-select: none;"></div><div class="chext-kd-img chext-hwt-grip" style="-webkit-user-select: none;"></div><div class="chext-hwt-buttons" style="-webkit-user-select: none;"><div class="chext-hwt-space chext-hwt-button chext-hwt-jfk chext-hwt-jfk-standard" style="-webkit-user-select: none;"></div><div class="chext-hwt-enter chext-hwt-button chext-hwt-jfk chext-hwt-jfk-standard" style="-webkit-user-select: none;"><div class="chext-hwt-enter-img chext-hwt-enter-img-dark chext-kd-img" style="-webkit-user-select: none;"></div></div><div class="chext-hwt-backspace chext-hwt-button chext-hwt-jfk chext-hwt-jfk-standard" style="-webkit-user-select: none;"><div class="chext-hwt-backspace-img chext-kd-img" style="-webkit-user-select: none;"></div></div></div><div class="chext-hwt-candidates" style="display: none; -webkit-user-select: none;"></div></div><div id="GOOGLE_INPUT_CHEXT_FLAG" input="" input_stat="{&quot;tlang&quot;:true,&quot;tsbc&quot;:true,&quot;pun&quot;:true}" style="display: none;"></div><div style="position: fixed; z-index: 2147483643; visibility: hidden;"><span class="chext-kd-inputtools-div chext-kd-statusbar"></span></div><div class="chext-ppe-box" tabindex="-1" style="direction: ltr; display: none; -webkit-user-select: none;"><div class="chext-ppe-edit" style="-webkit-user-select: none;"><table cellpadding="0" cellspacing="0" border="0" class="chext-ppe-tbl" style="-webkit-user-select: none;"><tbody class="chext-ppe-td" style="-webkit-user-select: none;"><tr class="chext-ppe-td" style="-webkit-user-select: none;"><td class="chext-ppe-td" style="-webkit-user-select: none;"><div class="chext-ppe-div" style="-webkit-user-select: none;"></div></td><td class="chext-ppe-td" style="width: 1px; -webkit-user-select: none;"><div class="chext-ppe-logo" style="-webkit-user-select: none;"></div></td></tr></tbody></table></div><div class="chext-ppe-div" style="-webkit-user-select: none;"><table cellpadding="0" cellspacing="0" border="0" class="chext-ppe-tbl" style="-webkit-user-select: none;"><tbody class="chext-ppe-td" style="-webkit-user-select: none;"><tr class="chext-ppe-td" style="-webkit-user-select: none;"><td class="chext-ppe-td" style="-webkit-user-select: none;"><div class="chext-ppe-can-list" style="-webkit-user-select: none;"></div></td><td class="chext-ppe-td" style="width: 1px; -webkit-user-select: none;"><div class="chext-ppe-navi-box" style="-webkit-user-select: none;"><div class="chext-ppe-pgu" style="-webkit-user-select: none;"></div><div class="chext-ppe-pgd" style="-webkit-user-select: none;"></div></div></td></tr></tbody></table></div></div>
-<script>
-  goog.require('good.auth.login');
-</script>
-<script>
-  good.auth.login.start();
-</script>
 </body></html>

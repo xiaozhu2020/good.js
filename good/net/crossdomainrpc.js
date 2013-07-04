@@ -8,12 +8,16 @@ goog.require('goog.json');
 /**
  * @constructor
  * @param {string} method
- * @param {string} url
+ * @param {string} url_account
+ * @param {string} url_version
+ * @param {string} url_method
  */
-good.net.CrossDomainRpc = function(method, url) {
-  if (url.indexOf('http') != 0) {
-    url = good.net.CrossDomainRpc.BASE_URL + url;
-  }
+good.net.CrossDomainRpc = function(method, url_account,
+    url_version, url_method) {
+  //  if (url.indexOf('http') != 0) {
+  var url = good.net.CrossDomainRpc.BASE_URL +
+      url_account + '/' + url_version + '/' + url_method;
+  //  }
   var xhr = new XMLHttpRequest();
   if ('withCredentials' in xhr) {
 

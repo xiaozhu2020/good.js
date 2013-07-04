@@ -53,7 +53,8 @@ good.auth.login = function(name, pwd) {
     return;
   }
 
-  var rpc = new good.net.CrossDomainRpc('POST', 'account/v1/login/' +
+  var rpc = new good.net.CrossDomainRpc('POST', good.config.ACCOUNT,
+      good.config.VERSION, 'login/' +
       encodeURIComponent(name) + '/' + encodeURIComponent(pwd));
   rpc.send(function(json) {
     if (json && json['token']) {
@@ -113,4 +114,3 @@ good.auth.check = function() {
 };
 
 goog.exportSymbol('good.auth.login.start', good.auth.login.start);
-goog.exportSymbol('good.auth.check', good.auth.check);
