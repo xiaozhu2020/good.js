@@ -8,3 +8,6 @@ target/
 
 # Created by OS.
 .DS_Store
+
+*-compiled.js
+*.js.map
