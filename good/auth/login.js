@@ -60,8 +60,14 @@ good.auth.login = function(name, pwd) {
     if (json && json['token']) {
       var uri = new goog.Uri(window.location);
       var redirect_uri = uri.getParameterValue('redirect_uri');
-      window.location.assign(redirect_uri + '#userId=' + json['userId'] +
-          '&access_token=' + json['token']);
+
+      if (good.auth.signup.isEmpty(redirect_uri)) {
+        window.location.assign('../../../' + 'index.html' + '#userId=' + json['userId'] +
+            '&access_token=' + json['token']);
+      }else {
+        window.location.assign(redirect_uri + '#userId=' + json['userId'] +
+            '&access_token=' + json['token']);
+      }
     } else {
       var errormsg_0_Passwd = goog.dom.getElement('errormsg_0_Passwd');
       errormsg_0_Passwd.innerText = '您输入的用户名或密码不正确。 ';
