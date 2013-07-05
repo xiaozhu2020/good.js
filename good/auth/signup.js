@@ -150,7 +150,8 @@ good.auth.signup.start = function() {
     rpc.body = body;
     rpc.send(function(json) {
       if (json && !json['error']) {
-        window.location.assign('../../../index.html' + '#userId=' + json['userId'] +
+        window.location.assign('../../../index.html' +
+            '#userId=' + json['userId'] +
             '&access_token=' + json['token']);
       }
     });

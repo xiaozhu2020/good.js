@@ -62,7 +62,8 @@ good.auth.login = function(name, pwd) {
       var redirect_uri = uri.getParameterValue('redirect_uri');
 
       if (good.auth.signup.isEmpty(redirect_uri)) {
-        window.location.assign('../../../' + 'index.html' + '#userId=' + json['userId'] +
+        window.location.assign('../../../' + 'index.html' +
+            '#userId=' + json['userId'] +
             '&access_token=' + json['token']);
       }else {
         window.location.assign(redirect_uri + '#userId=' + json['userId'] +

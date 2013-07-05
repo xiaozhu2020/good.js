@@ -68,7 +68,7 @@ good.net.CrossDomainRpc.prototype.send = function(onLoad) {
     if (window.navigator.userAgent.toLowerCase().indexOf('msie') == -1) {
       //contentType = 'application/json';
       this.xhr.setRequestHeader('Content-Type', contentType);
-    }    
+    }
   }
   this.xhr.send(this.body);
 };
