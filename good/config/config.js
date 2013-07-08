@@ -7,7 +7,7 @@ good.config.ACCOUNT = 'account';
 
 
 /** @type {string} */
-good.config.VERSION = 'v1';
+good.config.VERSION = 'v0.0.1';
 
 
 /** */
