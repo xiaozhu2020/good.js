@@ -12,12 +12,17 @@ goog.require('goog.json');
  * @param {string} url_version
  * @param {string} url_method
  */
-good.net.CrossDomainRpc = function(method, url_account,
-    url_version, url_method) {
-  //  if (url.indexOf('http') != 0) {
-  var url = good.net.CrossDomainRpc.BASE_URL +
-      url_account + '/' + url_version + '/' + url_method;
-  //  }
+good.net.CrossDomainRpc = function(method, name,
+    version, path, opt_serverAddress) {
+  var url = '';
+  if(opt_serverAddress){
+    url = opt_serverAddress +'/_ah/api/'+ name +
+    '/' + version + '/' + path;
+  }else{
+    url = good.net.CrossDomainRpc.BASE_URL +
+    name + '/' + version + '/' + path;
+  }
+  
   var xhr = new XMLHttpRequest();
   if ('withCredentials' in xhr) {
 

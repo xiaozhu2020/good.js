@@ -55,7 +55,8 @@ good.auth.login = function(name, pwd) {
 
   var rpc = new good.net.CrossDomainRpc('POST', good.config.ACCOUNT,
       good.config.VERSION, 'login/' +
-      encodeURIComponent(name) + '/' + encodeURIComponent(pwd));
+      encodeURIComponent(name) + '/' + encodeURIComponent(pwd),
+      good.config.SERVERADRESS);
   rpc.send(function(json) {
     if (json && json['token']) {
       var uri = new goog.Uri(window.location);

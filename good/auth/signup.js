@@ -48,7 +48,8 @@ good.auth.signup.validate = function(id) {
     if (id == 'User' && !good.auth.signup.isEmpty(elvalue)) {
       var rpc = new good.net.CrossDomainRpc('POST',
           good.config.ACCOUNT, good.config.VERSION,
-          'findByName/' + elvalue);
+          'findByName/' + elvalue,
+          good.config.SERVERADRESS);
       rpc.send(function(json) {
         if (json && json['token']) {
           errormsg.innerText = '该用户名已存在。改用其他用户名?';
@@ -142,7 +143,8 @@ good.auth.signup.start = function() {
     var name = $('User').value;
     var pwd = $('Passwd').value;
     var rpc = new good.net.CrossDomainRpc('POST', good.config.ACCOUNT,
-        good.config.VERSION, 'accountinfo');
+        good.config.VERSION, 'accountinfo',
+        good.config.SERVERADRESS);
     var body = {
       'name' : name,
       'token' : pwd,
