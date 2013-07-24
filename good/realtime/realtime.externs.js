@@ -35,11 +35,16 @@ good.realtime.authorize = function(userId, token) {};
  * @param {function(!good.realtime.Model)=} opt_initializerFn
  * @param {function(!good.realtime.Error)=} opt_errorFn
  */
-good.realtime.load = function(docId, onLoaded, opt_initializerFn, opt_errorFn) {};
+good.realtime.load =
+    function(docId, onLoaded, opt_initializerFn, opt_errorFn) {};
 
 
 /** @param {string} serverAddress */
 good.realtime.setServerAddress = function(serverAddress) {};
+
+
+
+/** @interface */
 good.realtime.EventTarget = function() {};
 
 
@@ -48,7 +53,8 @@ good.realtime.EventTarget = function() {};
  * @param {Function|Object} handler
  * @param {boolean=} opt_capture
  */
-good.realtime.EventTarget.prototype.addEventListener = function(type, handler, opt_capture) {};
+good.realtime.EventTarget.prototype.addEventListener =
+    function(type, handler, opt_capture) {};
 
 
 /**
@@ -56,7 +62,9 @@ good.realtime.EventTarget.prototype.addEventListener = function(type, handler, o
  * @param {Function|Object} handler
  * @param {boolean=} opt_capture
  */
-good.realtime.EventTarget.prototype.removeEventListener = function(type, handler, opt_capture) {};
+good.realtime.EventTarget.prototype.removeEventListener =
+    function(type, handler, opt_capture) {};
+
 good.realtime.BaseModelEvent = function() {};
 
 
@@ -80,6 +88,10 @@ good.realtime.BaseModelEvent.prototype.getType = function() {};
 good.realtime.BaseModelEvent.prototype.getUserId = function() {};
 
 
+/** @return {good.realtime.EventTarget} */
+good.realtime.BaseModelEvent.prototype.getTarget = function() {};
+
+
 
 // /** @type {boolean} */
 // good.realtime.BaseModelEvent.prototype.bubbles;
@@ -91,7 +103,7 @@ good.realtime.BaseModelEvent.prototype.getUserId = function() {};
 // good.realtime.BaseModelEvent.prototype.userId;
 /**
  * @constructor
- * @extends {good.realtime.EventTarget}
+ * @implements {good.realtime.EventTarget}
  */
 good.realtime.Document = function() {};
 good.realtime.Document.prototype.close = function() {};
@@ -108,7 +120,7 @@ good.realtime.Document.prototype.getModel = function() {};
 
 /**
  * @constructor
- * @extends {good.realtime.EventTarget}
+ * @implements {good.realtime.EventTarget}
  */
 good.realtime.Model = function() {};
 
@@ -146,10 +158,17 @@ good.realtime.Model.prototype.createString = function(opt_initialValue) {};
 good.realtime.Model.prototype.getRoot = function() {};
 
 
+/**
+ * @param {string} objectId
+ * @return {good.realtime.CollaborativeObject}
+ */
+good.realtime.Model.prototype.getObject = function(objectId) {};
+
+
 
 /**
  * @constructor
- * @extends {good.realtime.EventTarget}
+ * @implements {good.realtime.EventTarget}
  * @param {good.realtime.Model} model
  */
 good.realtime.CollaborativeObject = function(model) {};
@@ -164,11 +183,13 @@ good.realtime.CollaborativeObject.prototype.toString = function() {};
 
 
 /** @param {function(!good.realtime.ObjectChangedEvent)} handler */
-good.realtime.CollaborativeObject.prototype.addObjectChangedListener = function(handler) {};
+good.realtime.CollaborativeObject.prototype.addObjectChangedListener =
+    function(handler) {};
 
 
 /** @param {function(!good.realtime.ObjectChangedEvent)} handler */
-good.realtime.CollaborativeObject.prototype.removeObjectChangedListener = function(handler) {};
+good.realtime.CollaborativeObject.prototype.removeObjectChangedListener =
+    function(handler) {};
 
 
 
@@ -244,11 +265,13 @@ good.realtime.CollaborativeMap.prototype.getSize = function() {};
 
 
 /** @param {function(!good.realtime.ValueChangedEvent)} handler */
-good.realtime.CollaborativeMap.prototype.addValueChangedListener = function(handler) {};
+good.realtime.CollaborativeMap.prototype.addValueChangedListener =
+    function(handler) {};
 
 
 /** @param {function(!good.realtime.ValueChangedEvent)} handler */
-good.realtime.CollaborativeMap.prototype.removeValueChangedListener = function(handler) {};
+good.realtime.CollaborativeMap.prototype.removeValueChangedListener =
+    function(handler) {};
 
 
 
@@ -296,7 +319,8 @@ good.realtime.CollaborativeList.prototype.get = function(index) {};
  * @param {function(*, *): boolean=} opt_comparatorFn
  * @return {number}
  */
-good.realtime.CollaborativeList.prototype.indexOf = function(value, opt_comparatorFn) {};
+good.realtime.CollaborativeList.prototype.indexOf =
+    function(value, opt_comparatorFn) {};
 
 
 /**
@@ -310,7 +334,8 @@ good.realtime.CollaborativeList.prototype.insert = function(index, value) {};
  * @param {number} index
  * @param {Array.<*>} values
  */
-good.realtime.CollaborativeList.prototype.insertAll = function(index, values) {};
+good.realtime.CollaborativeList.prototype.insertAll =
+    function(index, values) {};
 
 
 /**
@@ -318,7 +343,8 @@ good.realtime.CollaborativeList.prototype.insertAll = function(index, values) {}
  * @param {function(*, *): boolean=} opt_comparatorFn
  * @return {number}
  */
-good.realtime.CollaborativeList.prototype.lastIndexOf = function(value, opt_comparatorFn) {};
+good.realtime.CollaborativeList.prototype.lastIndexOf =
+    function(value, opt_comparatorFn) {};
 
 
 /**
@@ -337,7 +363,8 @@ good.realtime.CollaborativeList.prototype.pushAll = function(values) {};
  * @param {boolean} canBeDeleted
  * @return {good.realtime.IndexReference}
  */
-good.realtime.CollaborativeList.prototype.registerReference = function(index, canBeDeleted) {};
+good.realtime.CollaborativeList.prototype.registerReference =
+    function(index, canBeDeleted) {};
 
 
 /** @param {number} index */
@@ -348,7 +375,8 @@ good.realtime.CollaborativeList.prototype.remove = function(index) {};
  * @param {number} startIndex
  * @param {number} endIndex
  */
-good.realtime.CollaborativeList.prototype.removeRange = function(startIndex, endIndex) {};
+good.realtime.CollaborativeList.prototype.removeRange =
+    function(startIndex, endIndex) {};
 
 
 /**
@@ -362,7 +390,8 @@ good.realtime.CollaborativeList.prototype.removeValue = function(value) {};
  * @param {number} index
  * @param {Array.<*>} values
  */
-good.realtime.CollaborativeList.prototype.replaceRange = function(index, values) {};
+good.realtime.CollaborativeList.prototype.replaceRange =
+    function(index, values) {};
 
 
 /**
@@ -381,15 +410,18 @@ good.realtime.CollaborativeList.prototype.setLength = function(length) {};
 
 
 /** @param {function(!good.realtime.ValuesAddedEvent)} handler */
-good.realtime.CollaborativeList.prototype.addValuesAddedListener = function(handler) {};
+good.realtime.CollaborativeList.prototype.addValuesAddedListener =
+    function(handler) {};
 
 
 /** @param {function(!good.realtime.ValuesRemovedEvent)} handler */
-good.realtime.CollaborativeList.prototype.addValuesRemovedListener = function(handler) {};
+good.realtime.CollaborativeList.prototype.addValuesRemovedListener =
+    function(handler) {};
 
 
 /** @param {function(!good.realtime.ValuesSetEvent)} handler */
-good.realtime.CollaborativeList.prototype.addValuesSetListener = function(handler) {};
+good.realtime.CollaborativeList.prototype.addValuesSetListener =
+    function(handler) {};
 
 
 /**
@@ -397,7 +429,8 @@ good.realtime.CollaborativeList.prototype.addValuesSetListener = function(handle
  * {function(!good.realtime.ValuesAddedEvent|good.realtime.ValuesRemovedEvent|good.realtime.ValuesSetEvent)}
  * handler
  */
-good.realtime.CollaborativeList.prototype.removeListListener = function(handler) {};
+good.realtime.CollaborativeList.prototype.removeListListener =
+    function(handler) {};
 
 
 
@@ -472,7 +505,8 @@ good.realtime.CollaborativeString.prototype.getText = function() {};
  * @param {number} index
  * @param {string} text
  */
-good.realtime.CollaborativeString.prototype.insertString = function(index, text) {};
+good.realtime.CollaborativeString.prototype.insertString =
+    function(index, text) {};
 
 
 /**
@@ -480,14 +514,16 @@ good.realtime.CollaborativeString.prototype.insertString = function(index, text)
  * @param {boolean} canBeDeleted
  * @return {good.realtime.IndexReference}
  */
-good.realtime.CollaborativeString.prototype.registerReference = function(index, canBeDeleted) {};
+good.realtime.CollaborativeString.prototype.registerReference =
+    function(index, canBeDeleted) {};
 
 
 /**
  * @param {number} startIndex
  * @param {number} endIndex
  */
-good.realtime.CollaborativeString.prototype.removeRange = function(startIndex, endIndex) {};
+good.realtime.CollaborativeString.prototype.removeRange =
+    function(startIndex, endIndex) {};
 
 
 /** @param {string} text */
@@ -499,11 +535,13 @@ good.realtime.CollaborativeString.prototype.getLength = function() {};
 
 
 /** @param {function(!good.realtime.TextDeletedEvent)} handler */
-good.realtime.CollaborativeString.prototype.addTextDeletedListener = function(handler) {};
+good.realtime.CollaborativeString.prototype.addTextDeletedListener =
+    function(handler) {};
 
 
 /** @param {function(!good.realtime.TextInsertedEvent)} handler */
-good.realtime.CollaborativeString.prototype.addTextInsertedListener = function(handler) {};
+good.realtime.CollaborativeString.prototype.addTextInsertedListener =
+    function(handler) {};
 
 
 /**
@@ -511,7 +549,8 @@ good.realtime.CollaborativeString.prototype.addTextInsertedListener = function(h
  * {function(!good.realtime.TextDeletedEvent|good.realtime.TextInsertedEvent)}
  * handler
  */
-good.realtime.CollaborativeString.prototype.removeStringListener = function(handler) {};
+good.realtime.CollaborativeString.prototype.removeStringListener =
+    function(handler) {};
 
 
 
