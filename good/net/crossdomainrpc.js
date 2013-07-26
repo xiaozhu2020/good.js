@@ -11,18 +11,11 @@ goog.require('goog.json');
  * @param {string} name
  * @param {string} version
  * @param {string} path
- * @param {string=} opt_serverAddress
+ * @param {string=} serverAddress
  */
 good.net.CrossDomainRpc = function(method, name,
-    version, path, opt_serverAddress) {
-  var url = '';
-  if (opt_serverAddress) {
-    url = opt_serverAddress + '/_ah/api/' + name +
-        '/' + version + '/' + path;
-  }else {
-    url = good.net.CrossDomainRpc.BASE_URL +
-        name + '/' + version + '/' + path;
-  }
+    version, path, serverAddress) {
+  var url = serverAddress + name + '/' + version + '/' + path;
 
   var xhr = new XMLHttpRequest();
   if ('withCredentials' in xhr) {
@@ -48,10 +41,6 @@ good.net.CrossDomainRpc = function(method, name,
   this.xhr = xhr;
   this.body = null;
 };
-
-
-/** @type {string} */
-good.net.CrossDomainRpc.BASE_URL = 'http://realtime.goodow.com/ah/api/';
 
 
 /** @param {function(?Object)} onLoad */
