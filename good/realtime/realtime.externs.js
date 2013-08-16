@@ -165,6 +165,13 @@ good.realtime.Model.prototype.getRoot = function() {};
 good.realtime.Model.prototype.getObject = function(objectId) {};
 
 
+/**
+ * @param {string} objectId
+ * @return {Array.<string>}
+ */
+good.realtime.Model.prototype.getParents = function(objectId) {};
+
+
 
 /**
  * @constructor
