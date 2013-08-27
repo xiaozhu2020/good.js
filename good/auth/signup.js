@@ -52,6 +52,7 @@ good.auth.signup.validate = function(id) {
           good.config.SERVERADRESS);
       rpc.send(function(json) {
         if (json && json['token']) {
+          el.className = 'form-error';
           errormsg.innerText = '该用户名已存在。改用其他用户名?';
         }
       });
@@ -61,6 +62,7 @@ good.auth.signup.validate = function(id) {
       if (!good.auth.signup.isEmpty(pwd) &&
           !good.auth.signup.isEmpty(pwdAgain) &&
           pwd != pwdAgain) {
+        el.className = 'form-error';
         errormsg.innerText = '两个密码不匹配。';
       }
     }
