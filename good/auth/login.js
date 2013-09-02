@@ -14,6 +14,7 @@ goog.require('goog.events.FocusHandler');
 
 
 /**
+ * login登录控制类
  * @constructor
  * @param {string}
  *          userId
@@ -31,6 +32,7 @@ good.auth.Auth.current = null;
 
 
 /**
+ * 登录页面输入框check方法
  * @param {string}
  *          name
  * @param {string}
@@ -80,7 +82,9 @@ good.auth.login = function(name, pwd) {
 };
 
 
-/** */
+/**
+ * login.html页面初始化类 
+ */
 good.auth.login.start = function() {
   good.config.start();
   var Passwd = goog.dom.getElement('Passwd');

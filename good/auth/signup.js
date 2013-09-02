@@ -10,6 +10,7 @@ goog.require('goog.events.InputHandler');
 
 
 /**
+ * 注册页面控制类
  * @param {string} str
  * @return {boolean}
  */
@@ -23,6 +24,7 @@ good.auth.signup.isEmpty = function(str) {
 
 
 /**
+ * 注册页面输入框Check方法
  * @param {string} id
  */
 good.auth.signup.validate = function(id) {
@@ -72,6 +74,7 @@ good.auth.signup.validate = function(id) {
 
 
 /**
+ * 输入框得到焦点时处理方法
  *  @param {Array.<string>} array
  */
 good.auth.signup.focus = function(array) {
@@ -96,6 +99,7 @@ good.auth.signup.focus = function(array) {
 
 
 /**
+ * 注册页面Form中输入框Check方法
  *  @param {Array} array
  *  @return {Boolean}
  */
@@ -111,7 +115,9 @@ good.auth.signup.formCheck = function(array) {
 };
 
 
-/** */
+/** 
+ * signup.html页面初始化方法
+ */
 good.auth.signup.start = function() {
   good.config.start();
   var $ = goog.dom.getElement;
